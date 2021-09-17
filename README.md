@@ -11,5 +11,7 @@ webRTC and Python AI api connection through frame capture, socket.io, and http
 
 
 [Reference]
-https://github.com/webrtcHacks/tfObjWebrtc
-https://github.com/Dirvann/webrtc-video-conference-simple-peer
+
+1. "JS-AI" https://github.com/webrtcHacks/tfObjWebrtc
+
+2. "multipeer webRTC" https://github.com/Dirvann/webrtc-video-conference-simple-peer
