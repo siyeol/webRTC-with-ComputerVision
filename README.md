@@ -8,3 +8,8 @@ webRTC and Python AI api connection through frame capture, socket.io, and http
 3. ngrok http 3012 (and follow the link) /or/ put https://localhost:3012 at Google Chrome
 
 4. check for the http /image200 status code
+
+
+[Reference]
+https://github.com/webrtcHacks/tfObjWebrtc
+https://github.com/Dirvann/webrtc-video-conference-simple-peer
