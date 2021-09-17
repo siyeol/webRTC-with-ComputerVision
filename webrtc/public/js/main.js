@@ -11,9 +11,9 @@ let localStream = null;
  */
 let peers = {}
 
-// redirect if not https
-if(location.href.substr(0,5) !== 'https') 
-    location.href = 'https' + location.href.substr(4, location.href.length - 4)
+// 여기 없애봤음 !! ㅋㅋㅋ redirect if not https
+// if(location.href.substr(0,5) !== 'https') 
+//     location.href = 'https' + location.href.substr(4, location.href.length - 4)
 
 
 //////////// CONFIGURATION //////////////////
@@ -70,7 +70,7 @@ navigator.mediaDevices.getUserMedia(constraints).then(stream => {
     // });
 
     init()
-    setTimeout(grab,1000);
+    // setTimeout(grab,1000);
 
 }).catch(e => alert(`getusermedia error ${e.name}`))
 
@@ -92,7 +92,7 @@ function upload(file) {
     formdata.append("image", file);
     console.log(file);
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'localhost:5000', true); //수정필요
+    xhr.open('POST', 'localhost:5000/image', true); //수정필요
     xhr.onload = function () {
         if (this.status === 200) {          
             setTimeout(grab,1000);
