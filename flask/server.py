@@ -4,7 +4,10 @@ from PIL import Image
 from flask import Flask, request, Response
 
 app = Flask(__name__)
-import ssl
+
+# import ssl
+# ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+# ssl_context.load_cert_chain(certfile='server.crt', keyfile='server.key', password='samzzang18')
 
 # for CORS
 @app.after_request
@@ -49,6 +52,7 @@ def image():
 
 if __name__ == '__main__':
 	# without SSL
+
     app.run(debug=True, host='0.0.0.0')
 
 	# with SSL

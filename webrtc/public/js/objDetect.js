@@ -64,13 +64,13 @@ function postFile(file) {
     formdata.append("threshold", scoreThreshold);
 
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', "http://172.30.1.51:5000/image", true);
+    xhr.open('POST', "http://127.0.0.1:5000/image", true);
     xhr.onload = function () {
         if (this.status === 200) {
-            let objects = JSON.parse(this.response);
+            // let objects = JSON.parse(this.response);
 
             //draw the boxes
-            drawBoxes(objects);
+            // drawBoxes(objects);
 
             //Save and send the next image
             imageCtx.drawImage(v, 0, 0, v.videoWidth, v.videoHeight, 0, 0, uploadWidth, uploadWidth * (v.videoHeight / v.videoWidth));
