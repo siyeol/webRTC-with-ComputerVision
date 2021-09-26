@@ -41,10 +41,12 @@ let constraints = {
     audio: true,
     video: {
         width: {
-            max: 1280
+            //max: 1280
+            max:640
         },
         height: {
-            max: 720
+            //max: 720
+            max:480
         },
         frameRate: {ideal : 15},
     }

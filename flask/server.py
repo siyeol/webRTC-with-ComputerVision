@@ -43,6 +43,7 @@ def image():
         # finally run the image through tensor flow object detection`
         image_object = Image.open(image_file)
         objects = object_detection_api.get_objects(image_object, threshold)
+        print(image_file)
         return objects
 
     except Exception as e:
