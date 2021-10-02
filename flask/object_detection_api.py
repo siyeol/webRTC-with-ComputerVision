@@ -4,18 +4,20 @@ import numpy as np
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
+import cv2
 import six.moves.urllib as urllib
 import tarfile
 import tensorflow as tf
 import json
 from keras.models import load_model
+from MediaPipeProcess import mediapipe_process
+import daiseecnn
 
 
 # if tf.__version__ != '1.4.0':
 #   raise ImportError('Please upgrade your tensorflow installation to v1.4.0!')
 
 # ENV SETUP  ### CWH: remove matplot display and manually add paths to references
-model = load_model('Xception_on_DAiSEE_fc.h5')
 
 # added to put object in JSON
 class Object(object):
@@ -32,14 +34,20 @@ def load_image_into_numpy_array(image):
 
 def get_objects(image, threshold=0.5):
     # print(type(image))
-    image = image.resize((299,299))
+    daisee = daiseecnn.DaiseeCNN()
+
     image_np = load_image_into_numpy_array(image)
+    rgbFrame = cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB)
+
     # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
-    image_np_expanded = np.expand_dims(image_np, axis=0)
 
-    predictions = model.predict(image_np_expanded)
+    daisee_prediction = daisee.prediction(image_np)
 
-    print("예측 : ", predictions[1][0][0], predictions[1][0][1])
+    print("예측 : ", daisee_prediction)
+
+    EAR, headArea, handLM, poseLM = mediapipe_process(rgbFrame, rgbFrame, rgbFrame)
+
+    print(f'EAR:{EAR} / headArea:{headArea}')
 
     outputJson = json.dumps([1,2,3])
     return outputJson
