@@ -1,4 +1,7 @@
 import object_detection_api
+import VoiceActivityDetection
+from multiprocessing import Process, Value
+import threading
 import os
 from PIL import Image
 from flask import Flask, request, Response
@@ -20,6 +23,11 @@ def after_request(response):
 
 @app.route('/')
 def index():
+    threading.Thread(target=VoiceActivityDetection.start_recording).start()
+    # gen_frame_thread.start()
+    # VoiceActivityDetection.start_recording()
+    # Process(target=VoiceActivityDetection.start_recording).start()
+
     return Response('Tensor Flow object detection')
 
 
