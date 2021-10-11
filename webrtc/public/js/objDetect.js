@@ -37,22 +37,25 @@ function drawBoxes(objects) {
     drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
 
     //filter out objects that contain a class_name and then draw boxes and labels on each
-    objects.filter(object => object.class_name).forEach(object => {
+    // objects.filter(object => object.class_name).forEach(object => {
 
-        let x = object.x * drawCanvas.width;
-        let y = object.y * drawCanvas.height;
-        let width = (object.width * drawCanvas.width) - x;
-        let height = (object.height * drawCanvas.height) - y;
+    //     let x = object.x * drawCanvas.width;
+    //     let y = object.y * drawCanvas.height;
+    //     let width = (object.width * drawCanvas.width) - x;
+    //     let height = (object.height * drawCanvas.height) - y;
 
-        //flip the x axis if local video is mirrored
-        if (mirror) {
-            x = drawCanvas.width - (x + width)
-        }
+    //     //flip the x axis if local video is mirrored
+    //     if (mirror) {
+    //         x = drawCanvas.width - (x + width)
+    //     }
 
-        drawCtx.fillText(object.class_name + " - " + Math.round(object.score * 100) + "%", x + 5, y + 20);
-        drawCtx.strokeRect(x, y, width, height);
+    //     drawCtx.fillText(object.class_name + " - " + Math.round(object.score * 100) + "%", x + 5, y + 20);
+    //     drawCtx.strokeRect(x, y, width, height);
 
-    });
+    // }
+    drawCtx.strokeRect(20,30,100,100);
+
+    // );
 }
 
 //Add file blob to a form and post
@@ -67,8 +70,8 @@ function postFile(file) {
     xhr.open('POST', "http://127.0.0.1:5000/image", true);
     xhr.onload = function () {
         if (this.status === 200) {
-            // let objects = JSON.parse(this.response);
-
+            let objects = JSON.parse(this.response);
+            console.log(objects);
             //draw the boxes
             // drawBoxes(objects);
 

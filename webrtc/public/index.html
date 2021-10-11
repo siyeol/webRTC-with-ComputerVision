@@ -33,6 +33,8 @@
             cursor: pointer;
         }
     </style>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
 </head>
 
 <body>
@@ -45,11 +47,14 @@
             Camera</button>
         <button id="muteButton" class="settings" onclick="toggleMute()">Unmuted</button>
         <button id="vidButton" class="settings" onclick="toggleVid()">Video Enabled</button>
+        <button id="teacherOn" class="settings" onclick="getTeacher()">Get Student1 status</button>
+
     </div>
 </body>
 <footer>
     <script src='/js/main.js' lang="text/javascript"></script>
     <script id="objDetect" src='/js/objDetect.js' data-source="localVideo" data-mirror="true" data-uploadWidth="1280" data-scoreThreshold="0.40"></script>
+    <script src='/js/teacher.js' lang="text/javascript"></script>
 
 
 </footer>

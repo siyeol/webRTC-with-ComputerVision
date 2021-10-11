@@ -49,5 +49,23 @@ def get_objects(image, threshold=0.5):
 
     print(f'EAR:{EAR} / headArea:{headArea}')
 
-    outputJson = json.dumps([1,2,3])
+    # ouput={}
+    # ouput['predict']=daisee_prediction
+    # ouput['EAR']=EAR
+    # ouput['headArea']=headArea
+    # print(type(daisee_prediction), type(EAR), type(headArea))
+    # outputJson = json.dumps({[1,2,3]})
+
+    
+    if not isinstance(daisee_prediction, int) :
+        Dout=daisee_prediction.item()
+    else:
+        Dout=daisee_prediction
+
+    if not isinstance(EAR, int):
+        Eout=EAR.item()
+    else:
+        Eout=EAR
+
+    outputJson = json.dumps({"predict":Dout, "EAR":Eout, "headarea":headArea})
     return outputJson

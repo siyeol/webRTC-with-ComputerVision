@@ -6,8 +6,11 @@ import os
 from PIL import Image
 from flask import Flask, request, Response
 
+
 app = Flask(__name__)
 
+global cvResult
+global vadResult
 # import ssl
 # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
 # ssl_context.load_cert_chain(certfile='server.crt', keyfile='server.key', password='samzzang18')
@@ -23,10 +26,14 @@ def after_request(response):
 
 @app.route('/')
 def index():
-    threading.Thread(target=VoiceActivityDetection.start_recording).start()
+    global vadResult
+    vadResult =Value('i', 0)
+
+    # vadResult=threading.Thread(target=VoiceActivityDetection.start_recording).start()
     # gen_frame_thread.start()
     # VoiceActivityDetection.start_recording()
-    # Process(target=VoiceActivityDetection.start_recording).start()
+    p=Process(target=VoiceActivityDetection.start_recording, args=(vadResult, ))
+    p.start()
 
     return Response('Tensor Flow object detection')
 
@@ -52,12 +59,21 @@ def image():
         image_object = Image.open(image_file)
         objects = object_detection_api.get_objects(image_object, threshold)
         print(image_file)
+
+        global cvResult
+        cvResult=objects
         return objects
 
     except Exception as e:
         print('POST /image error: %e' % e)
         return e
 
+
+
+@app.route('/teacher', methods=['GET'])
+def send2teacher():
+    global cvResult
+    return cvResult
 
 if __name__ == '__main__':
 	# without SSL
