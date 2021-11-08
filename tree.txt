@@ -1,0 +1,11 @@
+webRTC-pythonAI
+├─flask
+│  ├─server.py
+│  ├─object_detection_api.py
+│  └─VoiceActivityDetection.py
+└─webrtc
+    ├─public
+    │  ├─index.html
+    │  ├─teacher.html
+    │  ├─main.js
+    │  ├─objDetect.js

@@ -52,6 +52,37 @@ let constraints = {
     }
 }
 
+//chat
+const peerConnection = new RTCPeerConnection(configuration);
+const dataChannel = peerConnection.createDataChannel("chat", {negotiated:true, id:0});
+dataChannel.onopen = function(event){
+    dataChannel.send("hi");
+}
+dataChannel.onmessage = function(event){
+    console.log(event.data);
+}
+// const peerConnection = new RTCPeerConnection(configuration);
+// peerConnection.addEventListener('datachannel', event => {
+//     const dataChannel = event.channel;
+// });
+// const messageBox = document.querySelector('#messageBox');
+// const sendButton = document.querySelector('#sendButton');
+// const peerConnection = new RTCPeerConnection(configuration);
+// const dataChannel = peerConnection.createDataChannel();
+
+// // Enable textarea and button when opened
+// dataChannel.addEventListener('open', event => {
+//     messageBox.disabled = false;
+//     messageBox.focus();
+//     sendButton.disabled = false;
+// });
+
+// // Disable input when closed
+// dataChannel.addEventListener('close', event => {
+//     messageBox.disabled = false;
+//     sendButton.disabled = false;
+// });
+
 /////////////////////////////////////////////////////////
 
 constraints.video.facingMode = {
