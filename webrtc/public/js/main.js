@@ -129,6 +129,26 @@ function init() {
         socket.emit('initSend', socket_id)
     })
 
+    // socket.on('message', function(data){    
+    // });
+    // socket.on('response', {
+    //     "hello"
+    // });
+    socket.on('message',function(message){ //X
+		
+		console.log("서버가 message를 받았습니다"); 
+		console.dir(message); // 받은 msg를 찍어보기
+        printf("hello");
+        socket.emit('message',message);
+		
+	});
+
+    socket.on('msgrcv', message => { //X
+        console.log("what");
+        socket.emit('message',message);
+    })
+
+
     socket.on('initSend', socket_id => {
         console.log('INIT SEND ' + socket_id)
         addPeer(socket_id, true)

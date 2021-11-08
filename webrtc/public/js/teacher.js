@@ -1,18 +1,26 @@
-function getTeacher(file) {
+var content = "{'engage':1, 'bored':2}";
+function sendStatus() {
 
+    console.log("send try");
+    // var output = {sender:"sender", receiver:"receiver"
+    //     ,command:"chat", type:"text", data:"msg"};
+    socket.emit("message", content);
 
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', "http://43ea-61-82-78-227.ngrok.io/teacher", true);
-    xhr.onload = function () {
-        if (this.status === 200) {
-            let objects = JSON.parse(this.response);
-            console.log(objects);
-
-        }
-        else {
-            console.error(xhr);
-        }
-    };
-    xhr.send(null);
+    // socket.on('chat', message=>{
+    //     console.log('from server~', message)
+    // })
 }
+
+function getStatus() {
+
+    console.log("get try");
+    // // var output = {sender:"sender", receiver:"receiver"
+    // //     ,command:"chat", type:"text", data:"msg"};
+    // socket.emit("message", content);
+    var i=0;
+    socket.on('chat', message=>{
+        console.log('from server~', message, i);
+        i++;
+    })
+}
+
