@@ -3,10 +3,6 @@
 
 This repository contains the source code for webRTC based video conference platform compatible with Computer Vision Python APIs.
 
-## System Architecture
-
-![workflow](https://user-images.githubusercontent.com/33966473/134840473-2aa66fff-76f6-4e1a-9d4c-94ac5dee86bc.jpg)
-
 ## Key Features
 
 - Real-time video chat using WebRTC and Python APIs connected through frame capture, socket.io, and XMLhttpRequests.
@@ -23,10 +19,34 @@ This repository contains the source code for webRTC based video conference platf
 
 
 ## How to run
-1. run python Flask /flask/server.py
-2. move to webRTC folder and "npm install" and "npm start"
-3. ngrok http 3012 (and follow the link) /or/ put https://localhost:3012 at Google Chrome
-4. check for the http /image200 status code
+1. run python Flask `/flask/server.py`
+2. Move to the `webRTC` folder, install dependencies, and start the development server:
+`cd webRTC`
+`npm install` 
+`npm start`
+3. Expose the server using ngrok (optional): `ngrok http 3012`
+4. Alternatively, you can use `https://localhost:3012` in Google Chrome.
+5. Check for the `http /image 200` status code.
+
+## System Architecture
+
+![workflow](https://user-images.githubusercontent.com/33966473/134840473-2aa66fff-76f6-4e1a-9d4c-94ac5dee86bc.jpg)
+
+## Application Workflow
+
+This project is designed to provide real-time video chat with integrated computer vision capabilities. The key components and their interactions are described below:
+
+- **Browser Execution:** The `webrtc/public/` directory contains the frontend components executed in the browser. The `js/objDetect.js` file plays a crucial role by extracting video frames and sending them to the server for processing.
+
+- **Image Transmission:** The `postFile` function in the `webrtc/public/js/objDetect.js` file sends JPEG images to the Flask server at `http://127.0.0.1:5000/image`.
+
+- **Performance:** The application's performance depends on the hardware. It achieves approximately 70fps on an M1 Apple Silicon and around 15fps on an Intel i5.
+
+- **Server-side Processing:** The Flask server, located in the `/flask/server.py` file, listens for POST method requests. Upon receiving an image, it forwards it to the `object_detection_api.py` file for further processing, including object detection and pose estimation.
+
+- **Result Communication:** After processing the image, the server can send the results back as JSON data to the JavaScript code for display in the browser. Alternatively, the data can be transmitted directly to a teacher using HTTP or Socket.IO.
+
+
 
 ## Usage
 
