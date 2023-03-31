@@ -1,19 +1,8 @@
-import object_detection_api
-import VoiceActivityDetection
-from multiprocessing import Process, Value
-import threading
-import os
+from object_detection_api import ObjectDetection
 from PIL import Image
 from flask import Flask, request, Response
 
-
 app = Flask(__name__)
-
-global cvResult
-global vadResult
-# import ssl
-# ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-# ssl_context.load_cert_chain(certfile='server.crt', keyfile='server.key', password='samzzang18')
 
 # for CORS
 @app.after_request
@@ -26,21 +15,7 @@ def after_request(response):
 
 @app.route('/')
 def index():
-    global vadResult
-    vadResult =Value('i', 0)
-
-    # vadResult=threading.Thread(target=VoiceActivityDetection.start_recording).start()
-    # gen_frame_thread.start()
-    # VoiceActivityDetection.start_recording()
-    p=Process(target=VoiceActivityDetection.start_recording, args=(vadResult, ))
-    p.start()
-
     return Response('Tensor Flow object detection')
-
-
-# @app.route('/local')
-# def local():
-#     return Response(open('./static/local.html').read(), mimetype="text/html")
 
 
 @app.route('/image', methods=['POST'])
@@ -57,11 +32,8 @@ def image():
 
         # finally run the image through tensor flow object detection`
         image_object = Image.open(image_file)
-        objects = object_detection_api.get_objects(image_object, threshold)
-        print(image_file)
+        objects = ObjectDetection.get_objects(image_object, threshold)
 
-        global cvResult
-        cvResult=objects
         return objects
 
     except Exception as e:
@@ -69,15 +41,8 @@ def image():
         return e
 
 
-
-@app.route('/teacher', methods=['GET'])
-def send2teacher():
-    global cvResult
-    return cvResult
-
 if __name__ == '__main__':
 	# without SSL
-
     app.run(debug=True, host='0.0.0.0')
 
 	# with SSL

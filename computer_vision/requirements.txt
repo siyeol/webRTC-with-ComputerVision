@@ -1,0 +1,7 @@
+mediapipe==0.8.9
+numpy==1.19.5
+opencv-python==4.5.4.60
+tensorflow==1.15.5  # Required for keras
+keras==2.4.3
+Pillow==8.4.0
+Flask==2.1.1

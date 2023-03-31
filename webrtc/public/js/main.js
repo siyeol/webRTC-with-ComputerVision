@@ -11,10 +11,6 @@ let localStream = null;
  */
 let peers = {}
 
-// 여기 없애봤음 !! ㅋㅋㅋ redirect if not https
-// if(location.href.substr(0,5) !== 'https') 
-//     location.href = 'https' + location.href.substr(4, location.href.length - 4)
-
 
 //////////// CONFIGURATION //////////////////
 
