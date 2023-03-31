@@ -19,7 +19,7 @@ This repository contains the source code for webRTC based video conference platf
 
 
 ## How to run
-1. run python Flask `/flask/server.py`
+1. run python Flask `/computer_vision/server.py`
 2. Move to the `webRTC` folder, install dependencies, and start the development server:
 `cd webRTC`
 `npm install` 
